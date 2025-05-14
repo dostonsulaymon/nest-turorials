@@ -1,0 +1,9 @@
+### GET
+
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+  "email": "hello@hhsd.com",
+  "password": "2343eed"
+}
