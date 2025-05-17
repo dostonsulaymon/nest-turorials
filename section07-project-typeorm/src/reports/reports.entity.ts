@@ -6,5 +6,11 @@ export class ReportsEntity {
   id: number;
 
   @Column()
+  title: string;
+
+  @Column()
   content: string;
+
+  @Column()
+  secret: string;
 }

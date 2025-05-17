@@ -9,7 +9,7 @@ export class UsersService {
   constructor(
     @InjectRepository(UsersEntity)
     private readonly repository: Repository<UsersEntity>,
-  ) { }
+  ) {}
 
   async createUser(dto: CreateUserDto) {
     const newUser = this.repository.create({
@@ -22,16 +22,25 @@ export class UsersService {
 
   async findOne(id: number) {
     const user = await this.repository.findOneBy({ id });
+    if (!user) {
+      throw new Error('User not found');
+    }
     return user;
   }
 
   async update(id: number, attributes: Partial<UsersEntity>) {
-    
-
     const user = await this.findOne(id);
- 
+
     Object.assign(user, attributes);
 
     return this.repository.save(user);
+  }
+
+  findAllUsers() {
+    return this.repository.find();
+  }
+
+  async findByEmail(email: string) {
+    return this.repository.findOne({ where: { email } });
   }
 }
